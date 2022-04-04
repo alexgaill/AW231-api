@@ -16,14 +16,14 @@ final class CategorieController extends DefaultController{
     public function index ()
     {
         $categories = $this->model->findAll();
-        $arrayCategorie = array();
-        foreach ($categories as $categorie) {
-            $arrayCategorie[] = [
-                'id' => $categorie->getId(),
-                "name" => $categorie->getName()
-            ];
-        }
-        $this->jsonResponse($arrayCategorie, 200);
+        // $arrayCategorie = array();
+        // foreach ($categories as $categorie) {
+        //     $arrayCategorie[] = [
+        //         'id' => $categorie->getId(),
+        //         "name" => $categorie->getName()
+        //     ];
+        // }
+        $this->jsonResponse($categories, 200);
     }
 
     public function single (int $id)

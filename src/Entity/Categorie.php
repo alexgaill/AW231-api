@@ -13,6 +13,14 @@ final class Categorie extends DefaultEntity{
 
     private string $name;
 
+    public function __invoke()
+    {
+        return [
+            'id' => $this->id,
+            'name' => $this->name
+        ];
+    }
+
     /**
      * Get the value of id
      *
@@ -46,4 +54,6 @@ final class Categorie extends DefaultEntity{
 
         return $this;
     }
+
+
 }
