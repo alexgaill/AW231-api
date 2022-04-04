@@ -1,12 +1,7 @@
 <?php
 namespace Core\Database;
 
-use Core\Traits\DataSecureTrait;
-use Exception;
-
 class Database {
-
-    use DataSecureTrait;
 
     private string $host;
     private string $dbname;
@@ -81,10 +76,8 @@ class Database {
      */
     public function saveData (string $statement, array $data = []): int
     {
-        // On encode les données pour éviter d'enregistrer du code en BDD
-        $verifyData = $this->verifyData($data);
         $prepare = $this->pdo->prepare($statement);
-        if ($prepare->execute($verifyData)) {
+        if ($prepare->execute($data)) {
             return $this->pdo->lastInsertId();
         } else {
             throw new \Exception("Une erreur s'est produite lors de l'insertion. Veuillez réessayer");
