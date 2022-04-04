@@ -5,8 +5,8 @@ use Core\Database\Database;
 
 class DefaultModel extends Database{
 
-    protected $table;
-    protected $entity;
+    protected string $table;
+    protected string $entity;
 
     /**
      * Retourne toutes lignes d'une table

@@ -1,14 +1,25 @@
 <?php
 namespace Core\Controller;
 
+use Core\Trait\JsonTrait;
+
 /**
  * Une class abstract est une class parent qui ne peut être instanciée.
  * Elle contient obligatoirement des méthodes abstract.
  * 
  * Ces méthodes abstract sont des méthodes que l'on doit obligatoirement définir dans les class enfant
  */
-abstract class DefaultController{
+class DefaultController{
 
+    use JsonTrait;
+
+    /**
+     * Génère l'affichage des templates des pages
+     *
+     * @param string $view
+     * @param array $params
+     * @return void
+     */
     public function render (string $view, array $params = []): void
     {
         ob_start();
@@ -21,6 +32,5 @@ abstract class DefaultController{
         $content = ob_get_clean();
         require ROOT . "/templates/base.phtml";
     }
-
 
 }

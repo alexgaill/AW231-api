@@ -15,6 +15,7 @@ class Database {
         $this->pdo = new \PDO("mysql:host=$this->host;dbname=$this->dbname", $this->user, $this->password, [
             \PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION
         ]);
+        $this->pdo->exec("SET NAMES utf8");
     }
 
     /**
