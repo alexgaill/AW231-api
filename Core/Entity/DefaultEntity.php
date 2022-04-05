@@ -32,5 +32,5 @@ abstract class DefaultEntity implements JsonSerializable{
         }
     }
 
-    public abstract function JsonSerialize ();
+    public abstract function JsonSerialize (): array;
 }

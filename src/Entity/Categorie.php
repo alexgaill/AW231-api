@@ -55,7 +55,7 @@ final class Categorie extends DefaultEntity{
         return $this;
     }
 
-    public function jsonSerialize(): mixed
+    public function jsonSerialize(): array
     {
         return [
             'id' => $this->id,

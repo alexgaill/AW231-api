@@ -22,4 +22,3 @@ if (isset($_POST["name"]) && !empty($_POST['name'])) {
         
     }
 }
-// var_dump($result);
