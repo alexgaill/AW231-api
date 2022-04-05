@@ -84,9 +84,9 @@ class DefaultModel extends Database{
      *
      * @param integer $id
      * @param array $data
-     * @return integer
+     * @return bool
      */
-    public function update (int $id, array $data): int
+    public function update (int $id, array $data): bool
     {
         $stmt = "UPDATE $this->table SET ";
         foreach ($data as $key => $value) {
@@ -100,9 +100,9 @@ class DefaultModel extends Database{
      * Supprime une ligne en BDD
      *
      * @param integer $id
-     * @return integer
+     * @return bool
      */
-    public function delete (int $id): int
+    public function delete (int $id): bool
     {
         $stmt = "DELETE FROM $this->table WHERE id = $id";
         return $this->saveData($stmt);

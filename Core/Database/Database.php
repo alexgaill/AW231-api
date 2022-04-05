@@ -73,15 +73,18 @@ class Database {
      *
      * @param string $statement
      * @param array $data
-     * @return int
+     * @return int|bool
      */
-    public function saveData (string $statement, array $data = []): int
+    public function saveData (string $statement, array $data = []): int|bool
     {
         $prepare = $this->pdo->prepare($statement);
         if ($prepare->execute($data)) {
-            return $this->pdo->lastInsertId();
+            if (str_contains($statement, "INSERT INTO")) {
+                return $this->pdo->lastInsertId();
+            }
+            return true;
         } else {
-            throw new \Exception("Une erreur s'est produite lors de l'insertion. Veuillez réessayer");
+            throw new \Exception("Une erreur s'est produite lors de l'insertion, la modification ou la suppression. Veuillez réessayer");
         }
     }
 }

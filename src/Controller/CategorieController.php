@@ -21,7 +21,7 @@ final class CategorieController extends DefaultController{
     public function index () :never
     {
         $categories = $this->model->findAll();
-        $this->jsonResponse($categories, 200);
+        self::jsonResponse($categories, 200);
     }
 
     /**
@@ -33,7 +33,7 @@ final class CategorieController extends DefaultController{
     public function single (int $id)
     {
         $categorie = $this->model->find($id);
-        $this->jsonResponse($categorie, 200);
+        self::jsonResponse($categorie, 200);
     }
 
     /**
@@ -46,7 +46,7 @@ final class CategorieController extends DefaultController{
     {
         $lastId = $this->model->save($data);
         $categorie = $this->model->find($lastId);
-        $this->jsonResponse($categorie, 201);
+        self::jsonResponse($categorie, 201);
     }
 
     /**
@@ -58,8 +58,10 @@ final class CategorieController extends DefaultController{
      */
     public function update (int $id, array $data)
     {
-        $this->model->update($id, $data);
-        $this->jsonResponse("Categorie modifiée", 201);
+        if($this->model->update($id, $data)) {
+            $categorie = $this->model->find($id);
+            self::jsonResponse($categorie, 201);
+        }
     }
 
     /**
@@ -71,6 +73,6 @@ final class CategorieController extends DefaultController{
     public function delete (int $id)
     {
         $this->model->delete($id);
-        $this->jsonResponse("Catégorie supprimée", 200);
+        self::jsonResponse("Catégorie supprimée", 200);
     }
 }

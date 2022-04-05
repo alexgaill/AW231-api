@@ -2,9 +2,8 @@
 namespace App\Entity;
 
 use Core\Entity\DefaultEntity;
-use JsonSerializable;
 
-final class Categorie extends DefaultEntity implements JsonSerializable{
+final class Categorie extends DefaultEntity{
 
     // php@8.1
     // private readonly int $id;
@@ -63,6 +62,4 @@ final class Categorie extends DefaultEntity implements JsonSerializable{
             'name' => $this->name
         ];
     }
-
-
 }

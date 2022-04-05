@@ -1,7 +1,9 @@
 <?php
 namespace Core\Entity;
 
-class DefaultEntity {
+use JsonSerializable;
+
+abstract class DefaultEntity implements JsonSerializable{
 
     // Déclenche l'hydration à l'instanciation d'une entité
     public function __construct(array $data = [])
@@ -29,4 +31,6 @@ class DefaultEntity {
             }
         }
     }
+
+    public abstract function JsonSerialize ();
 }
