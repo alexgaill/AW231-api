@@ -2,8 +2,9 @@
 namespace App\Entity;
 
 use Core\Entity\DefaultEntity;
+use JsonSerializable;
 
-final class Categorie extends DefaultEntity{
+final class Categorie extends DefaultEntity implements JsonSerializable{
 
     // php@8.1
     // private readonly int $id;
@@ -13,13 +14,13 @@ final class Categorie extends DefaultEntity{
 
     private string $name;
 
-    public function __invoke()
-    {
-        return [
-            'id' => $this->id,
-            'name' => $this->name
-        ];
-    }
+    // public function __invoke()
+    // {
+    //     return [
+    //         'id' => $this->id,
+    //         'name' => $this->name
+    //     ];
+    // }
 
     /**
      * Get the value of id
@@ -53,6 +54,14 @@ final class Categorie extends DefaultEntity{
         $this->name = $name;
 
         return $this;
+    }
+
+    public function jsonSerialize(): mixed
+    {
+        return [
+            'id' => $this->id,
+            'name' => $this->name
+        ];
     }
 
 

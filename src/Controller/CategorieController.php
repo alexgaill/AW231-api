@@ -13,40 +13,64 @@ final class CategorieController extends DefaultController{
         $this->model = new CategorieModel;
     }
 
-    public function index ()
+    /**
+     * Renvoie toutes les catégories
+     *
+
+     */
+    public function index () :never
     {
         $categories = $this->model->findAll();
-        // $arrayCategorie = array();
-        // foreach ($categories as $categorie) {
-        //     $arrayCategorie[] = [
-        //         'id' => $categorie->getId(),
-        //         "name" => $categorie->getName()
-        //     ];
-        // }
         $this->jsonResponse($categories, 200);
     }
 
+    /**
+     * Renvoie une catégorie en fonction de son id
+     *
+     * @param integer $id
+     * @return void
+     */
     public function single (int $id)
     {
         $categorie = $this->model->find($id);
-        $cat = [
-            'id' => $categorie->getId(),
-            'name' => $categorie->getName()
-        ];
-        $this->jsonResponse($cat, 200);
-
+        $this->jsonResponse($categorie, 200);
     }
 
-    public function save ()
+    /**
+     * Enregistre une catégorie en BDD
+     *
+     * @param array $data
+     * @return void
+     */
+    public function save (array $data)
     {
-        $lastId = $this->model->save($_POST);
+        $lastId = $this->model->save($data);
         $categorie = $this->model->find($lastId);
-        $cat = [
-            'id' => $categorie->getId(),
-            'name' => $categorie->getName()
-        ];
-        $this->jsonResponse($cat, 201);
+        $this->jsonResponse($categorie, 201);
+    }
 
+    /**
+     * Modifie une catégorie en BDD
+     *
+     * @param integer $id
+     * @param array $data
+     * @return void
+     */
+    public function update (int $id, array $data)
+    {
+        $this->model->update($id, $data);
+        $this->jsonResponse("Categorie modifiée", 201);
+    }
 
+    /**
+     * Supprime une catégorie en BDD
+     *
+     * @param integer $id
+     * @return void
+     */
+    public function delete (int $id)
+    {
+        $this->model->delete($id);
+        $this->jsonResponse("Catégorie supprimée", 200);
     }
 }

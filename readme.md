@@ -15,6 +15,8 @@ Le client du restaurant peut également réserver une table dans le restaurant.
 
 Le site du restaurant contient une partie admin pour le responsable afin qu'il puisse gérer ses plats, ses commandes (modifier le statut à en cours de préparation, prête, récupérée) et les réservations de table (ajout de table, suppression, ...) Chaque table peut avoir entre 2 et 4 personnes. Pour une réservation de 8 il faut donc bloquer 2 tables de 4 ou 4 tables de 2.
 
+Un utilisateur n'a pas besoin de s'incrire pour commander ses plats mais doit renseigner ses infos (nom, prenom, n°tel, mail)
+
 ## Partie 1
 
 Vous démarrez la réalisation de l'api (et du front) pour prévoir toutes les routes permettant le CRUD des différentes entités
