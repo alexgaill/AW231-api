@@ -2,6 +2,7 @@
 namespace Core\Routeur;
 
 use App\Security\ApiSecurity;
+use App\Security\JWTSecurity;
 use Core\Trait\JsonTrait;
 
 final class Routeur {
@@ -18,6 +19,10 @@ final class Routeur {
             } else {
                 throw new \Exception("Vous n'avez pas les droits pour utiliser cette api", 404);
                 
+            }
+
+            if (isset($_COOKIE['token']) && !empty($_COOKIE['token'])) {
+                (new JWTSecurity)->verifyToken($_COOKIE['token']);
             }
             // On casse le path info pour récupérer le nom du controller à instancier
             // ainsi que l'id de l'élément à récupérer ou la méthode à exécuter.
@@ -54,7 +59,7 @@ final class Routeur {
                         if (isset($path[4])) {
                             if (method_exists($controller, $path[4])) {
                                 $method = $path[4];
-                                $controller->$method();
+                                $controller->$method($_POST);
                             } else {
                                 throw new \Exception("Méthode inexistante en POST", 404);
                             }
