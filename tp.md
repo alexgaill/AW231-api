@@ -20,3 +20,11 @@ Un utilisateur n'a pas besoin de s'incrire pour commander ses plats mais doit re
 ## Partie 1
 
 Vous démarrez la réalisation de l'api (et du front) pour prévoir toutes les routes permettant le CRUD des différentes entités
+
+## Partie 2
+
+Vous intégrez la gestion de l'api par les Request Methods et implémentez la sécurisation.
+
+## Partie 3
+
+Vous ajoutez la documentation de l'api
