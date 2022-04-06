@@ -1,0 +1,146 @@
+openapi: 3.0.0
+info:
+  title: Apiblog
+  version: v1
+servers:
+  -
+    url: 'localhost:8000'
+paths:
+  /categorie:
+    get:
+      tags:
+        - Categorie
+      summary: 'Renvoie toutes les catégories'
+      operationId: 6ca3f34cd03c31c4da51cc133a75733a
+      responses:
+        '200':
+          description: 'Retourne l''ensemble des catégories'
+          content:
+            application/json:
+              schema:
+                description: 'Contenu de notre catégorie'
+                type: array
+                items:
+                  $ref: '#/components/schemas/Categorie'
+        '404':
+          description: 'Erreur de récupération'
+          content:
+            application/json:
+              schema:
+                description: 'Message d''erreur'
+                type: string
+              example: 'Une erreur s''est produite'
+    post:
+      tags:
+        - Categorie
+      summary: 'Enregistre une catégorie en BDD'
+      operationId: 716309a0c867895237359ffe441ff66e
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              required:
+                - name
+              properties:
+                name:
+                  type: string
+                  example: 'nom de la catégorie'
+              type: object
+      responses:
+        '201':
+          description: 'Retourne la catégorie nouvellement crée'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Categorie'
+  '/categorie/{id}':
+    get:
+      tags:
+        - Categorie
+      summary: 'Renvoie une catégorie en fonction de son id'
+      operationId: 287834d7700e96fc8d9e955e1d6d9c48
+      parameters:
+        -
+          name: id
+          in: path
+          description: 'Id de la catégorie'
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: 'Retourne une catégorie en fonction de son id'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Categorie'
+    put:
+      tags:
+        - Categorie
+      summary: 'Modifie une catégorie en BDD'
+      operationId: 35238412ff3dd99f671b3853dce1d32a
+      parameters:
+        -
+          name: id
+          in: path
+          description: 'id de la catégorie à modifier'
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              required:
+                - name
+              properties:
+                name:
+                  type: string
+                  example: 'nom de la catégorie'
+              type: object
+      responses:
+        '200':
+          description: 'Suppression réussie'
+          content:
+            application/json:
+              schema:
+                type: string
+    delete:
+      tags:
+        - Categorie
+      summary: 'Supprime une catégorie en BDD'
+      operationId: 1e266059252467de6f452b176c27d998
+      parameters:
+        -
+          name: id
+          in: path
+          description: 'Id de la catégorie'
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: 'Suppression réussie'
+          content:
+            application/json:
+              schema:
+                type: string
+components:
+  schemas:
+    Categorie:
+      properties:
+        id:
+          type: integer
+          nullable: false
+        name:
+          type: string
+          maximum: 100
+          example: 'Nom de la catégorie'
+          nullable: false
+      type: object
+tags:
+  -
+    name: Categorie
+    description: 'Routes liées aux catégories'

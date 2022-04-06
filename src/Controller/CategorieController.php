@@ -4,7 +4,17 @@ namespace App\Controller;
 use App\Model\CategorieModel;
 use App\Security\JWTSecurity;
 use Core\Controller\DefaultController;
+use OpenApi\Annotations as OA;
 
+
+/**
+ * @OA\Info(title="Apiblog", version="v1")
+ * @OA\Server(url="localhost:8000")
+ * @OA\Tag(
+ *  name="Categorie",
+ *  description="Routes liées aux catégories"
+ * )
+ */
 final class CategorieController extends DefaultController{
 
     private CategorieModel $model;
@@ -19,7 +29,30 @@ final class CategorieController extends DefaultController{
     /**
      * Renvoie toutes les catégories
      *
-
+     * @OA\Get(
+     *  path="/categorie",
+     *  tags={"Categorie"},
+     *  @OA\Response(
+     *      response=200,
+     *      description="Retourne l'ensemble des catégories",
+     *      @OA\JsonContent(
+     *          description="Contenu de notre catégorie",
+     *          type="array",
+     *          @OA\Items(
+     *              ref="#/components/schemas/Categorie"
+     *          )
+     *      )
+     *  ),
+     *  @OA\Response(
+     *      response=404,
+     *      description="Erreur de récupération",
+     *      @OA\JsonContent(
+     *          description="Message d'erreur",
+     *          type="string",
+     *          example="Une erreur s'est produite"
+     *      )
+     *  )
+     * )
      */
     public function index () :never
     {
@@ -32,6 +65,28 @@ final class CategorieController extends DefaultController{
      *
      * @param integer $id
      * @return void
+     * 
+     * @OA\Get(
+     *  path="/categorie/{id}",
+     *  tags={"Categorie"},
+     *  @OA\Parameter(
+     *      name="id",
+     *      in="path",
+     *      description="Id de la catégorie",
+     *      required=true,
+     *      @OA\Schema(
+     *          type="integer"
+     *      )
+     *  ),
+     *  @OA\Response(
+     *      response=200,
+     *      description="Retourne une catégorie en fonction de son id",
+     *      @OA\JsonContent(
+     *          type="Categorie",
+     *          ref="#/components/schemas/Categorie"
+     *      )
+     *  )
+     * )
      */
     public function single (int $id)
     {
@@ -44,6 +99,30 @@ final class CategorieController extends DefaultController{
      *
      * @param array $data
      * @return void
+     * 
+     * @OA\Post(
+     *  path="/categorie",
+     *  tags={"Categorie"},
+     *  @OA\RequestBody(
+     *      @OA\JsonContent(
+     *          required={"name"},
+     *          @OA\Property(
+     *              property="name",
+     *              type="string",
+     *              example="nom de la catégorie"
+     *          )
+     *      ),
+     *      required=true
+     *  ),
+     *  @OA\Response(
+     *      response=201,
+     *      description="Retourne la catégorie nouvellement crée",
+     *      @OA\JsonContent(
+     *          type="Categorie",
+     *          ref="#/components/schemas/Categorie"
+     *      )
+     *  )
+     * )
      */
     public function save (array $data)
     {
@@ -63,6 +142,38 @@ final class CategorieController extends DefaultController{
      * @param integer $id
      * @param array $data
      * @return void
+     * 
+     * @OA\Put(
+     *  path="/categorie/{id}",
+     *  tags={"Categorie"},
+     *  @OA\Parameter(
+     *      name="id",
+     *      in="path",
+     *      description="id de la catégorie à modifier",
+     *      required=true,
+     *      @OA\Schema(
+     *          type="integer"
+     *      )
+     *  ),
+     *  @OA\RequestBody(
+     *       @OA\JsonContent(
+     *          required={"name"},
+     *          @OA\Property(
+     *              property="name",
+     *              type="string",
+     *              example="nom de la catégorie"
+     *          )
+     *      ),
+     *      required=true
+     *  ),
+     *  @OA\Response(
+     *      response=200,
+     *      description="Suppression réussie",
+     *      @OA\JsonContent(
+     *          type="string"
+     *      )
+     *  )
+     * )
      */
     public function update (int $id, array $data)
     {
@@ -77,6 +188,26 @@ final class CategorieController extends DefaultController{
      *
      * @param integer $id
      * @return void
+     * @OA\Delete(
+     *  path="/categorie/{id}",
+     *  tags={"Categorie"},
+     *  @OA\Parameter(
+     *      name="id",
+     *      in="path",
+     *      description="Id de la catégorie",
+     *      required=true,
+     *      @OA\Schema(
+     *          type="integer"
+     *      )
+     *  ),
+     *  @OA\Response(
+     *      response=200,
+     *      description="Suppression réussie",
+     *      @OA\JsonContent(
+     *          type="string"
+     *      )
+     *  )
+     * )
      */
     public function delete (int $id)
     {

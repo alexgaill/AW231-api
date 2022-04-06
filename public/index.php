@@ -1,5 +1,4 @@
 <?php
-
 use Core\Routeur\Routeur;
 
 define("ROOT", dirname(__DIR__));
