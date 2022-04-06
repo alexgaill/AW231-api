@@ -2,15 +2,18 @@
 namespace App\Controller;
 
 use App\Model\CategorieModel;
+use App\Security\JWTSecurity;
 use Core\Controller\DefaultController;
 
 final class CategorieController extends DefaultController{
 
-    private $model;
+    private CategorieModel $model;
+    private array $security;
 
     public function __construct()
     {
         $this->model = new CategorieModel;
+        $this->security = (new JWTSecurity)->verifyToken();
     }
 
     /**
@@ -44,9 +47,14 @@ final class CategorieController extends DefaultController{
      */
     public function save (array $data)
     {
-        $lastId = $this->model->save($data);
-        $categorie = $this->model->find($lastId);
-        self::jsonResponse($categorie, 201);
+        if ($this->security["role"] === "admin") {
+            $lastId = $this->model->save($data);
+            $categorie = $this->model->find($lastId);
+            self::jsonResponse($categorie, 201);
+        } else {
+            throw new \Exception("Vous n'avez pas les droits", 1);
+            
+        }
     }
 
     /**
@@ -72,7 +80,7 @@ final class CategorieController extends DefaultController{
      */
     public function delete (int $id)
     {
-        $this->model->delete($id);
+        var_dump($this->model->delete($id));
         self::jsonResponse("Catégorie supprimée", 200);
     }
 }

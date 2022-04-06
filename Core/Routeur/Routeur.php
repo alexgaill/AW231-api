@@ -21,9 +21,6 @@ final class Routeur {
                 
             }
 
-            if (isset($_COOKIE['token']) && !empty($_COOKIE['token'])) {
-                (new JWTSecurity)->verifyToken($_COOKIE['token']);
-            }
             // On casse le path info pour récupérer le nom du controller à instancier
             // ainsi que l'id de l'élément à récupérer ou la méthode à exécuter.
             $path = explode("/", $_SERVER['PATH_INFO']);

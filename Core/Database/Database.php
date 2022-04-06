@@ -53,9 +53,9 @@ class Database {
      * @param string $statement
      * @param string $className
      * @param boolean $one
-     * @return array<object>|object
+     * @return array<object>|object|false
      */
-    public function getData (string $statement, string $className, bool $one = false): array|object
+    public function getData (string $statement, string $className, bool $one = false): array|object|false
     {
         $query = $this->pdo->query($statement);
         $query->setFetchMode(\PDO::FETCH_CLASS, "App\Entity\\$className");
@@ -87,4 +87,5 @@ class Database {
             throw new \Exception("Une erreur s'est produite lors de l'insertion, la modification ou la suppression. Veuillez réessayer");
         }
     }
+    
 }

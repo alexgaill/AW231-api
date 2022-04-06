@@ -26,7 +26,6 @@ class UserController extends DefaultController {
                 $token = (new JWTSecurity)->sendToken($user);
                 self::jsonResponse($token, 200);
             }
-
         } else {
             throw new \Exception("Invalid request method", 404);
             
