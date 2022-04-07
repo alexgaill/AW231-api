@@ -11,15 +11,18 @@ final class Routeur {
 
     public static function Routes (){
         try {
-            if (isset($_GET['apikey']) && !empty($_GET['apikey'])) {
-                if( !(new ApiSecurity)->verifyApikey(htmlspecialchars($_GET["apikey"])))
-                {
-                    throw new \Exception("Vous n'avez pas les droits pour utiliser cette api", 404);
-                }
-            } else {
-                throw new \Exception("Vous n'avez pas les droits pour utiliser cette api", 404);
+            header("Access-Control-Allow-Origin: *");
+            header("Access-Control-Allow-Methods: GET POST PUT DELETE OPTIONS");
+            header("Access-Control-Allow-Credentials: true");
+            // if (isset($_GET['apikey']) && !empty($_GET['apikey'])) {
+            //     if( !(new ApiSecurity)->verifyApikey(htmlspecialchars($_GET["apikey"])))
+            //     {
+            //         throw new \Exception("Vous n'avez pas les droits pour utiliser cette api", 404);
+            //     }
+            // } else {
+            //     throw new \Exception("Vous n'avez pas les droits pour utiliser cette api", 404);
                 
-            }
+            // }
 
             // On casse le path info pour récupérer le nom du controller à instancier
             // ainsi que l'id de l'élément à récupérer ou la méthode à exécuter.

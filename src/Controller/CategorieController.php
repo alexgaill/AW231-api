@@ -18,12 +18,12 @@ use OpenApi\Annotations as OA;
 final class CategorieController extends DefaultController{
 
     private CategorieModel $model;
-    private array $security;
+    // private array $security;
 
     public function __construct()
     {
         $this->model = new CategorieModel;
-        $this->security = (new JWTSecurity)->verifyToken();
+        // $this->security = (new JWTSecurity)->verifyToken();
     }
 
     /**

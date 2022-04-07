@@ -2,6 +2,9 @@
 
 Projet réalisé avec la formation IPSSI EISI AW23.1 en 2022
 
+## Merci d'évaluer le module
+Pour évaluer le module c'est [ici](https://bit.ly/3K6c0uH)
+
 ## Fonctionnement du projet
 
 > @Require{
@@ -13,6 +16,6 @@ Projet réalisé avec la formation IPSSI EISI AW23.1 en 2022
 
 > Pour lancer le projet, chargez l'autoloader avec la commande:
 >
-> ```composer install``` ou ```composer dump-autoload```
+> ```composer install```
 >
 > puis insérez vos données de config de DB sur le fichier [dbConfig.php](/config/dbConfig.php)
